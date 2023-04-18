@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // função para criptografar texto
+function criptografar(texto) {
+  let criptografado = texto.replace(/e/g, "enter");
+  criptografado = criptografado.replace(/i/g, "imes");
+  criptografado = criptografado.replace(/a/g, "ai");
+  criptografado = criptografado.replace(/o/g, "ober");
+  criptografado = criptografado.replace(/u/g, "ufat");
+  return criptografado;
+}
+
+// função para descriptografar texto
+function descriptografar(criptografado) {
+  let texto = criptografado.replace(/enter/g, "e");
+  texto = texto.replace(/imes/g, "i");
+  texto = texto.replace(/ai/g, "a");
+  texto = texto.replace(/ober/g, "o");
+  texto = texto.replace(/ufat/g, "u");
+  return texto;
+}
+
+// função para copiar texto para área de transferência
+function copiar(texto) {
+  const input = document.createElement("input");
+  input.setAttribute("value", texto);
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}
+
+// seleciona os elementos HTML da página
+const inputTexto = document.getElementById("input-texto");
+const selectOperacao = document.getElementById("select-operacao");
+const btnExecutar = document.getElementById("btn-executar");
+const btnCopiar = document.getElementById("btn-copiar");
+const resultado = document.getElementById("resultado");
+
+// adiciona evento de clique ao botão "Executar"
+btnExecutar.addEventListener("click", function() {
+  const texto = inputTexto.value.toLowerCase();
+  let resultadoTexto;
+  if (selectOperacao.value === "criptografar") {
+    resultadoTexto = criptografar(texto);
+  } else {
+    resultadoTexto = descriptografar(texto);
+  }
+  resultado.textContent = resultadoTexto;
+});
+
+// adiciona evento de clique ao botão "Copiar"
+btnCopiar.addEventListener("click", function() {
+  const texto = resultado.textContent;
+  copiar(texto);
+});
+
+    </script>
+</body>
+</html>
